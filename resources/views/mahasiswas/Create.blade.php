@@ -30,7 +30,7 @@ nput.<br><br>
 </div>
 <div class="form-group">
 <label for="Kelas">Kelas</label>
-<input type="Kelas" name="Kelas" class="form-control" id="Kelas" aria-describedby="password" >
+<input type="Kelas" name="kelas_id" class="form-control" id="kelas_id" aria-describedby="password" >
 </div>
 <div class="form-group">
 <label for="Jurusan">Jurusan</label>

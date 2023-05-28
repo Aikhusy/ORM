@@ -25,4 +25,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/search', [MahasiswaController::class, 'find']);
 
+route::get('/mahasiswa', [App\Http\Controllers\MahasiswaController::class, 'index']);
 Route::resource('mahasiswas', MahasiswaController::class);

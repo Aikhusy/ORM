@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Kelas;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 
@@ -13,9 +14,9 @@ class MahasiswaController extends Controller
     public function index()
     {
         //fungsi eloquent menampilkan data menggunakan pagination
-        $mahasiswas = Mahasiswa::orderBy('Nim', 'desc')->paginate(6);// Mengambil semua isi tabel
-        $posts = Mahasiswa::orderBy('Nim', 'desc')->paginate(6);
-        return view('mahasiswas.index', compact('mahasiswas'));
+        $mahasiswa = Mahasiswa::with('kelas')->get();
+        $paginate = Mahasiswa::orderBy('Nim', 'asc')->paginate(3);
+        return view('mahasiswas.index',['mahasiswa'=>$mahasiswa, 'paginate'=>$paginate]);
         // with('i', (request()->input('page', 1) - 1) * 5);
     }
         
@@ -37,7 +38,7 @@ class MahasiswaController extends Controller
             'Nim' => 'required',
             'Nama' => 'required',
             'Tetala' => 'required',
-            'Kelas' => 'required',
+            'kelas_id' => 'required',
             'Jurusan' => 'required',
             'Email' => 'required',
             'No_Handphone' => 'required',
@@ -79,7 +80,7 @@ class MahasiswaController extends Controller
             'Nim' => 'required',
             'Nama' => 'required',
             'Tetala' => 'required',
-            'Kelas' => 'required',
+            'kelas_id' => 'required',
             'Jurusan' => 'required',
             'Email' => 'required',
             'No_Handphone' => 'required',

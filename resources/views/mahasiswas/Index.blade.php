@@ -29,13 +29,13 @@
 <th>No_Handphone</th>
 <th width="280px">Action</th>
 </tr>
-@foreach ($mahasiswas as $Mahasiswa)
+@foreach ($paginate as $Mahasiswa)
 <tr>
 
 <td>{{ $Mahasiswa->Nim }}</td>
 <td>{{ $Mahasiswa->Nama }}</td>
 <td>{{ $Mahasiswa->Tetala }}</td>
-<td>{{ $Mahasiswa->Kelas }}</td>
+<td>{{ $Mahasiswa->kelas->nama_kelas }}</td>
 <td>{{ $Mahasiswa->Jurusan }}</td>
 <td>{{ $Mahasiswa->Email }}</td>
 <td>{{ $Mahasiswa->No_Handphone }}</td>
@@ -54,7 +54,7 @@
 </tr> @endforeach
 
 </table> 
-{{ $mahasiswas->links('pagination::bootstrap-4') }}
+{{ $paginate->links('pagination::bootstrap-4') }}
 @endsection
 
 
