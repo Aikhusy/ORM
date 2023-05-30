@@ -30,8 +30,13 @@ nput.<br><br>
 </div>
 <div class="form-group">
 <label for="Kelas">Kelas</label>
-<input type="Kelas" name="Kelas" class="form-control" id="Kelas" value="{{ $Mahasiswa->Kelas }}" aria- describedby="Kelas" >
+    <select class="form-control" name="kelas_id">
+    @foreach($kelas_list as $list)
+        <option value="{{$list->id}}" >{{$list->nama_kelas}}</option>
+    @endforeach
+    </select>
 </div>
+
 <div class="form-group">
 <label for="Jurusan">Jurusan</label>
 <input type="Jurusan" name="Jurusan" class="form-control" id="Jurusan" value="{{ $Mahasiswa->Jurusan }}" aria- describedby="Jurusan" >

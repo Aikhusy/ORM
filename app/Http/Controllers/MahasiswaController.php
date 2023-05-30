@@ -26,7 +26,8 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        return view('mahasiswas.create');
+        $kelas_list= Kelas::all();
+        return view('mahasiswas.create',compact('kelas_list'));
     }
 
     /**
@@ -34,6 +35,7 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'Nim' => 'required',
             'Nama' => 'required',
@@ -44,7 +46,20 @@ class MahasiswaController extends Controller
             'No_Handphone' => 'required',
         ]);
         //fungsi eloquent untuk menambah data
-        Mahasiswa::create($request->all());
+        $mahasiswa = new Mahasiswa;
+        $mahasiswa->Nim=$request->get('Nim');
+        $mahasiswa->Nama=$request->get('Nama');
+        $mahasiswa->Tetala=$request->get('Tetala');
+        $mahasiswa->kelas_id=$request->get('kelas_id');
+        $mahasiswa->Jurusan=$request->get('Jurusan');
+        $mahasiswa->Email=$request->get('Email');
+        $mahasiswa->No_Handphone=$request->get('No_Handphone');
+
+        $kelas=new Kelas;
+        $kelas->id=$request->get('kelas_id');
+
+        $mahasiswa->kelas()->associate($kelas);
+        $mahasiswa->save();
 
         //jika data berhasil ditambahkan, akan kembali ke halaman utama
         return redirect()->route('mahasiswas.index')
@@ -66,7 +81,8 @@ class MahasiswaController extends Controller
     public function edit($Nim)
     {
         $Mahasiswa = Mahasiswa::where('Nim',$Nim)->first();
-        return view('mahasiswas.edit', compact('Mahasiswa'));
+        $kelas_list= Kelas::all();
+        return view('mahasiswas.edit', compact('Mahasiswa','kelas_list'));
     }
 
     /**
@@ -112,5 +128,14 @@ class MahasiswaController extends Controller
                             ->paginate(5);
 
         return view('mahasiswas.index', compact('mahasiswas'));
+    }
+    public function ngecek(Request $request)
+    {
+    // Proses penyimpanan data atau logika lainnya
+
+    // Gunakan dd() untuk melihat nilai variabel setelah formulir dikirim
+    dd($request->all());
+    
+    // Redirect atau respon lainnya setelah proses penyimpanan
     }
 }
