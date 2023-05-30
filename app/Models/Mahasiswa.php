@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\nilai;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -33,6 +34,11 @@ class Mahasiswa extends Model //Definisi Model
     public function kelas()
     {
         return $this->BelongsTo(Kelas::class);
+    }
+
+    public function getNilai()
+    {
+        return $this->BelongsTo(nilai::class);
     }
 }
 
